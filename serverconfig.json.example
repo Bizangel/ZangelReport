@@ -1,0 +1,9 @@
+{
+  "bind_address": "127.0.0.1",
+  "bind_port": "8080",
+  "https": true,
+  "https_key_path": "key.pem",
+  "https_cert_path": "server.crt",
+  "discord_bot_token": "alphanumeric_token_for_authorization_headers_validation",
+  "reporter_authorization_token":  "firefly bearer header token goes here"
+}
