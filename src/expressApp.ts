@@ -1,11 +1,11 @@
 import express from 'express';
 import jsonErrorHandler from './middlewares/jsonErrorHandler';
 import useHeaderAuthenticationMiddleware from './middlewares/headerAuthenticationMiddleware';
-import discordRouter from './routes/discordReport';
 import { Router } from 'express';
-// import { discordReport } from './controllers/discordReport';
+import { initDiscordBot } from './services/initDiscord';
+import discordRouter from './routes/discordReportRoutes';
 
-const useExpressApp = (JSONConfig: any) => {
+const useExpressApp = async (JSONConfig: any) => {
   const app = express();
 
   // middlewares
@@ -18,6 +18,8 @@ const useExpressApp = (JSONConfig: any) => {
         JSONConfig.reporter_authorization_token,
       ),
     );
+
+  await initDiscordBot(JSONConfig);
 
   // routers
   const apiRouter = Router();

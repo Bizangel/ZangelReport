@@ -1,10 +1,9 @@
 import discordReportController from '../controllers/discordReportController';
-import { notifyDiscordDTOZod } from '../schemas/discord';
+import { notifyDiscordDTOZod } from '../schemas/discordSchemas';
 import { ZodRouter } from '../middlewares/zodValidatorMiddleware';
 
 var discordRouter = new ZodRouter();
 
-discordRouter.route('get', '/getNotify', discordReportController.discordGet);
 discordRouter.route(
   'post',
   '/notify',

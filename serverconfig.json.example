@@ -1,9 +1,15 @@
 {
   "bind_address": "127.0.0.1",
-  "bind_port": "8080",
+  "bind_port": "8081",
   "https": true,
   "https_key_path": "key.pem",
-  "https_cert_path": "server.crt",
-  "discord_bot_token": "alphanumeric_token_for_authorization_headers_validation",
-  "reporter_authorization_token":  "firefly bearer header token goes here"
+  "https_cert_path": "cert.crt",
+  "discord_bot_token": "discord bot token goes here ensure permissions",
+  "reporter_authorization_token": "header token for requests goes here",
+  "discord_report_config": {
+    "announce_channel_id": "channel id for announcements goes here (will use @here)",
+    "dm_owner_id": "owner id for dm reportings goes here",
+    "reports_channel_id": "channel id for reportings",
+    "logs_channel_id": "channel id for logging"
+  }
 }

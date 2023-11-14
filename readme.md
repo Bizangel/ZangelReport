@@ -1,3 +1,6 @@
+## Usage and API docs
+
+Refer to [API Documentation](docs.md)
 
 ## Development
 
@@ -36,8 +39,7 @@ This will generate a `./output` folder.
 Certificate must not be normal .pem format but instead certificate must be CRT format.
 
 ### Transform PEM to CRT (using key)
+
 ```bash
 openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out server.crt
 ```
-
-
