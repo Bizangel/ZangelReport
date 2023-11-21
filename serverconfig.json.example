@@ -6,6 +6,8 @@
   "https_cert_path": "cert.crt",
   "discord_bot_token": "discord bot token goes here ensure permissions",
   "reporter_authorization_token": "header token for requests goes here",
+  "retry_interval_seconds": 300, // seconds to wait before retrying notification if it fails
+  "max_retries_before_crash": 12, // how many times to retry sending notification before crashing
   "discord_report_config": {
     "announce_channel_id": "channel id for announcements goes here (will use @here)",
     "dm_owner_id": "owner id for dm reportings goes here",
