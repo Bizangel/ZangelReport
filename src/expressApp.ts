@@ -1,9 +1,8 @@
 import express from 'express';
 import jsonErrorHandler from './middlewares/jsonErrorHandler';
 import useHeaderAuthenticationMiddleware from './middlewares/headerAuthenticationMiddleware';
-import { Router } from 'express';
 import { initDiscordBot } from './services/initDiscord';
-import discordRouter from './routes/discordReportRoutes';
+import notifyRouter from './routes/notifyRoute';
 
 const useExpressApp = async (JSONConfig: any) => {
   const app = express();
@@ -21,11 +20,7 @@ const useExpressApp = async (JSONConfig: any) => {
 
   await initDiscordBot(JSONConfig);
 
-  // routers
-  const apiRouter = Router();
-
-  apiRouter.use('/discord', discordRouter.getRouter());
-  app.use('/api', apiRouter);
+  app.use('/api', notifyRouter.getRouter());
 
   return app;
 };

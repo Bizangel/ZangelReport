@@ -1,18 +1,15 @@
 import { Client, ClientOptions, GatewayIntentBits } from 'discord.js';
-import {
-  DiscordConfigDTO,
-  discordConfigDTOZod,
-} from '../schemas/discordSchemas';
+import { DiscordConfig, discordConfigDTO } from '../schemas/notifySchema';
 
 class DiscordClient extends Client {
-  discordConfig: DiscordConfigDTO;
+  discordConfig: DiscordConfig;
 
-  constructor(options: ClientOptions, discordConfig?: DiscordConfigDTO) {
+  constructor(options: ClientOptions, discordConfig?: DiscordConfig) {
     super(options);
-    this.discordConfig = discordConfig as DiscordConfigDTO;
+    this.discordConfig = discordConfig as DiscordConfig;
   }
 
-  setDiscordConfig(config: DiscordConfigDTO) {
+  setDiscordConfig(config: DiscordConfig) {
     this.discordConfig = config;
   }
 }
@@ -30,7 +27,7 @@ declare global {
 }
 
 export async function initDiscordBot(JSONConfig: any) {
-  const discordConfig = discordConfigDTOZod.parse(
+  const discordConfig = discordConfigDTO.parse(
     JSONConfig.discord_report_config,
   );
 

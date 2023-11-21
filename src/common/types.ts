@@ -1,6 +1,5 @@
 import { Response, Request } from 'express';
 
-// type BodiedResponse<T> = Response & { body: T };
 export type APIEndpoint<T = null> = (
   request: Request,
   response: Response,

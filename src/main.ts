@@ -1,12 +1,10 @@
 import https from 'https';
-import fs from 'fs';
 import useExpressApp from './expressApp';
+import JSONConfig from './common/jsonconfig';
+
+import fs from 'fs';
 
 async function main() {
-  const JSONConfig = JSON.parse(
-    fs.readFileSync('serverconfig.json', { encoding: 'utf-8' }),
-  );
-
   const app = await useExpressApp(JSONConfig);
 
   if (JSONConfig.https) {
