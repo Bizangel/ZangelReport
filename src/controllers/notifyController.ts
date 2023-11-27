@@ -4,6 +4,7 @@ import { NotifyRequest } from '../schemas/notifySchema';
 // import discordSendService from '../services/discordSendService';
 // import { discordClient } from '../services/initDiscord';
 import processNotify from '../services/processNotify';
+import cacheService from '../services/cacheService';
 // import JSONConfig from '../common/JSONConfig';
 // import sleep from '../common/sleep';
 
@@ -22,15 +23,8 @@ const notify: APIEndpoint<NotifyRequest> = async (
     console.error(error);
   }
 
-  // if not able to then add to cache.
-
-  // let retries = 0;
-  // while (retries < JSONConfig.max_retries_before_crash) {
-  //   await sleep(JSONConfig.retry_interval_seconds * 1000);
-  //   // attempt again
-
-  //   retries++;
-  // }
+  // if failed append to cache. Will be picked up and retried later.
+  cacheService.appendMessage(payload);
 
   return res.status(200).json({ success: true });
 };

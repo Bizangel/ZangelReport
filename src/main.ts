@@ -1,11 +1,14 @@
 import https from 'https';
 import useExpressApp from './expressApp';
 import JSONConfig from './common/jsonconfig';
-
 import fs from 'fs';
+import { startQueueAsyncProcess } from './services/cacheService';
 
 async function main() {
+  // const flushCache =
   const app = await useExpressApp(JSONConfig);
+
+  startQueueAsyncProcess();
 
   if (JSONConfig.https) {
     const certContents = fs.readFileSync(JSONConfig.https_cert_path);

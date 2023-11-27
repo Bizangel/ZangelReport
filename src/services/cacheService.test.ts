@@ -1,6 +1,14 @@
+// import JSONConfig from '../common/jsonconfig';
 import { NotifyRequest } from '../schemas/notifySchema';
 import cacheService from './cacheService';
 import fs from 'fs';
+
+// jest.mock('../common/jsonconfig', () => ({
+//   __esModule: true, // this property makes it work
+//   default: {
+//     myconfig: 'sampleval',
+//   },
+// }));
 
 const EXAMPLE_REQUEST: NotifyRequest = {
   message: 'Example Message',
@@ -16,9 +24,10 @@ describe('cacheService tests', () => {
     fs.rmSync(TEST_FILEPATH, { force: true });
   });
 
-  it('Stores tests properly', async () => {
+  it('Dumps tests properly', async () => {
     // act
-    await cacheService.appendTocache(EXAMPLE_REQUEST, TEST_FILEPATH);
+    await cacheService.appendMessage(EXAMPLE_REQUEST);
+    await cacheService.dumpCache(TEST_FILEPATH);
 
     // assert
     const contents = fs.readFileSync(TEST_FILEPATH, { encoding: 'utf-8' });
@@ -27,9 +36,11 @@ describe('cacheService tests', () => {
   });
 
   it('Pops tests properly', async () => {
+    await cacheService.appendMessage(EXAMPLE_REQUEST);
+    await cacheService.dumpCache(TEST_FILEPATH);
+
     // act
-    await cacheService.appendTocache(EXAMPLE_REQUEST, TEST_FILEPATH);
-    const popped = await cacheService.popCache(TEST_FILEPATH);
+    const popped = await cacheService.popAndReadCacheDump(TEST_FILEPATH);
 
     expect(popped[0]).toEqual(EXAMPLE_REQUEST);
   });
